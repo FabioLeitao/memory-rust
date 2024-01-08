@@ -1,7 +1,6 @@
-#[cfg_attr(target_arch = "wasm32",
-           wasm_bindgen::prelude::wasm_bindgen(start))]
+#[cfg_attr(target_arch = "wasm32", wasm_bindgen::prelude::wasm_bindgen(start))]
 pub fn main() {
-// }fn main() {
+    // }fn main() {
     use slint::Model;
 
     let main_window = MainWindow::new().unwrap();
@@ -26,8 +25,10 @@ pub fn main() {
 
     let main_window_weak = main_window.as_weak();
     main_window.on_check_if_pair_solved(move || {
-        let mut flipped_tiles =
-            tiles_model.iter().enumerate().filter(|(_, tile)| tile.image_visible && !tile.solved);
+        let mut flipped_tiles = tiles_model
+            .iter()
+            .enumerate()
+            .filter(|(_, tile)| tile.image_visible && !tile.solved);
 
         if let (Some((t1_idx, mut t1)), Some((t2_idx, mut t2))) =
             (flipped_tiles.next(), flipped_tiles.next())
@@ -57,7 +58,7 @@ pub fn main() {
 }
 
 slint::slint! {
-    
+
     // Added:
     struct TileData {
         image: image,
@@ -112,7 +113,7 @@ slint::slint! {
     export component MainWindow inherits Window {
         width: 326px;
         height: 326px;
-        
+
         callback check_if_pair_solved(); // Added
         in property <bool> disable_tiles; // Added
 
